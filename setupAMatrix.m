@@ -24,6 +24,6 @@ function aMatrix = setupAMatrix(filename)
         A = [A; 0 0 0 0 -xV(i) -yV(i) -zV(i) -1 vV(i)*xV(i) vV(i)*yV(i) vV(i)*zV(i) vV(i);];
     end
     
-    aMatrix = A;
+    aMatrix = A; % The final A matrix of Ax = 0
     
 end
