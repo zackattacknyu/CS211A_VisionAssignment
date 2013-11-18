@@ -27,6 +27,9 @@ imagePoints = cell(1,6);
 
 
 for row = 1:imageSize(1)
+    if mod(row,100) == 0
+        row
+    end
     for col = 1:imageSize(2)
         for color = 1:6
             
