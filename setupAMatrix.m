@@ -1,22 +1,36 @@
 % Setup the A matrix for finding the callibration matrix
 % In form of Ax = 0
+% The ordering of the points from first to last is
+% Green, Blue, Red, Gold, Purple, Yellow
 
-function aMatrix = setupAMatrix(filename)
-    fileID = fopen(filename, 'r');
+function aMatrix = setupAMatrix(realWorldVectorTextFile,colorValueTextFile,imageFileName)
+    fileID = fopen(realWorldVectorTextFile, 'r');
     dataPoints = fscanf(fileID, '%f');
+    imagePoints = getImagePoints(imageFileName,colorValueTextFile,10);
     
     xV = [];
     yV = [];
     zV = [];
     uV = [];
     vV = [];
-    for i=1:5:30
+    
+    %imagePoints = {[81,1165],[2359,744],[2037,1855],[2293,2821],[1090,3198],[1176,1360]};
+    
+    for i=1:length(imagePoints)
+       temp = imagePoints{i};
+       uV(i) = temp(1);
+       vV(i) = temp(2);
+    end
+    uV
+    vV
+    for i=1:3:18
         xV = [xV, dataPoints(i)];
         yV = [yV, dataPoints(i+1)];
         zV = [zV, dataPoints(i+2)];
-        uV = [uV, dataPoints(i+3)];
-        vV = [vV, dataPoints(i+4)];
     end
+    xV
+    yV
+    zV
     
     A = [];
     for i=1:6
