@@ -6,7 +6,7 @@
 function aMatrix = setupAMatrix(realWorldVectorTextFile,colorValueTextFile,imageFileName)
     fileID = fopen(realWorldVectorTextFile, 'r');
     dataPoints = fscanf(fileID, '%f');
-    imagePoints = getImagePoints(imageFileName,colorValueTextFile,10);
+    imagePoints = getImagePoints(imageFileName,colorValueTextFile,12);
     
     xV = [];
     yV = [];
