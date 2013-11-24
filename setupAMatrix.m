@@ -21,16 +21,11 @@ function aMatrix = setupAMatrix(realWorldVectorTextFile,colorValueTextFile,image
        uV(i) = temp(1);
        vV(i) = temp(2);
     end
-    uV
-    vV
     for i=1:3:18
         xV = [xV, dataPoints(i)];
         yV = [yV, dataPoints(i+1)];
         zV = [zV, dataPoints(i+2)];
     end
-    xV
-    yV
-    zV
     
     A = [];
     for i=1:6

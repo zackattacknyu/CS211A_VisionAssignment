@@ -13,22 +13,21 @@ clear all;
 % initProbePoint = [11;5.25;8.1875;1]; 
 % probeInCameraCoords = extrinsic*initProbePoint; 
 
-probeInCameraCoords = [5.55139;0.3983109;3.114695;1];
+probeInCameraCoords = [5.55139;0.3983109;3.114695;1]
 
-realPoints = [];
-images = dir('C:\Users\kevin\Documents\GitHub\prod');
-for i = 4:(length(images)-1)
-    aMatrix = setupAMatrix('data_points.txt','colors_for_data_prodPictures.txt',strcat('C:\Users\kevin\Documents\GitHub\prod\',images(i).name));
-    callibM = findCallibration(aMatrix); % Find the intrinsic matrix
+images = files('C:\Users\kevin\Documents\GitHub\prod');
+for i = 4:(length(files)-1)
+    aMatrixFirstPoint = setupAMatrix('data_points.txt','colors_for_data_prodPictures.txt','images/IMG_20131122_162357_original.jpg');
+    callibM_FirstPoint = findCallibration(aMatrixFirstPoint); % Find the intrinsic matrix
     %normCallibM = callibM/callibM(3,4);
-    normCallibM = callibM;
-    newM = normCallibM(1:3,1:3);
+    normCallibM_FirstPoint = callibM_FirstPoint;
+    newMFirstPoint = normCallibM_FirstPoint(1:3,1:3);
     %transColumn = inv(newM)*normCallibM(:,4);
-    [rMatrix,qMatrix] = rq(newM);
-    transColumn = inv(rMatrix)*normCallibM(:,4);
-    extrinsic = [qMatrix transColumn; 0 0 0 1];
-    realPoints = [realPoints; (inv(extrinsic)*probeInCameraCoords)'];
-end
+    [rMatrixFirstPoint,qMatrixFirstPoint] = rq(newMFirstPoint);
+    transColumn_FirstPoint = inv(rMatrixFirstPoint)*normCallibM_FirstPoint(:,4);
+    extrinsicFirstPoint = [qMatrixFirstPoint transColumn_FirstPoint; 0 0 0 1];
+    testFirstPoint = inv(extrinsicFirstPoint)*probeInCameraCoords;
+    
 
 % aMatrixTestPoint = setupAMatrix('data_points.txt','colors_for_data_calibPoint.txt','images/calibProbe2.jpg');
 % callibM_TestPoint = findCallibration(aMatrixTestPoint); % Find the intrinsic matrix
