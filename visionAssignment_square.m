@@ -15,6 +15,8 @@ extrinsic = [qMatrix transColumn; 0 0 0 1];
 initProbePoint = [8.4375;0;9.8125;1];
 probeInCameraCoords = extrinsic*initProbePoint; 
 
+callibM_probePic = normCallibM;
+
 imagePoints = [];
 realPoints = [];
 fileID = fopen('locationTextFiles/IPlanePoints_square.txt', 'r');

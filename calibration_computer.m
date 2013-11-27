@@ -1,7 +1,6 @@
 % This script will run all of the code necessary for the project
 
 clear all;
-%79 1397 2138 908 1848 1750 2216 2406 1510 2990 1007 1516
 pixelValues = [79 1397 2138 908 1848 1750 2216 2406 1510 2990 1007 1516];
 aMatrix = setupAMatrix('data_points_redux.txt',pixelValues); % Read in the 6 recorded points and find A
 callibM = findCallibration(aMatrix); % Find the intrinsic matrix

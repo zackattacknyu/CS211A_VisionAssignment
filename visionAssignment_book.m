@@ -2,7 +2,7 @@
 
 clear all;
 pixelValues = [1946 749 1137 1035 1174 1545 1097 2865 660 1993 367 1410];
-aMatrix = setupAMatrix('data_points_block.txt',pixelValues); % Read in the 6 recorded points and find A
+aMatrix = setupAMatrix('data_points_block_book.txt',pixelValues); % Read in the 6 recorded points and find A
 callibM = findCallibration(aMatrix); % Find the intrinsic matrix
 %normCallibM = callibM/callibM(3,4);
 normCallibM = callibM;
@@ -15,6 +15,8 @@ extrinsic = [qMatrix transColumn; 0 0 0 1];
 initProbePoint = [10.0625;0.0625;5.6875;1];
 probeInCameraCoords = extrinsic*initProbePoint; 
 
+callibM_probePic = normCallibM
+
 imagePoints = [];
 realPoints = [];
 fileID = fopen('locationTextFiles/IPlanePoints_book.txt', 'r');
@@ -23,7 +25,7 @@ for i = 1:length(prodImagePoints)
     imagePoints = [imagePoints; prodImagePoints(i)];
     
     if(mod(i,12) == 0)
-        aMatrix = setupAMatrix('data_points_block.txt',imagePoints); % Read in the 6 recorded points and find A
+        aMatrix = setupAMatrix('data_points_block_book.txt',imagePoints); % Read in the 6 recorded points and find A
         callibM = findCallibration(aMatrix); % Find the intrinsic matrix
         %normCallibM = callibM/callibM(3,4);
         normCallibM = callibM;
@@ -38,4 +40,4 @@ for i = 1:length(prodImagePoints)
     end
 end
 
-scatter3(realPoints(:,1), realPoints(:,3), realPoints(:,2),5);
+scatter3(realPoints(:,1), realPoints(:,3), realPoints(:,2),12);
